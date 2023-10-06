@@ -18,8 +18,7 @@ public class TaskService {
 	// Add a new Task to the Task list
 	public void addTask(Task task) {
 		if (taskExists(task)) {
-	        System.err.println("Error: Duplicate Task. Task with ID " + task.getTaskId() + " already exists.");
-	        task = null;
+	        throw new IllegalArgumentException("Error: Duplicate Task. Task with ID " + task.getTaskId() + " already exists.");
 	    } else {
 	        taskList.add(task);
 	    }
@@ -43,7 +42,7 @@ public class TaskService {
 				return;
 			}
 		}
-		System.err.println("Deletion Unsuccessful: Task Id not found.");
+		throw new IllegalArgumentException("Deletion Unsuccessful: Task Id not found.");
 	}
 	
 	// Update a Task's specified field to a new value
@@ -56,17 +55,16 @@ public class TaskService {
 			    case "Task Name":
 			    	task.setTaskName(newValue);
 			    	System.out.println("Update Success: Task Name Changed.");
-			        break;
+			        return;
 			    case "Task Description":
 			    	task.setTaskDescription(newValue);
 			    	System.out.println("Update Success: Task Description Changed.");
-			        break;
+			    	return;
 			    default:
 			        throw new IllegalArgumentException("Invalid Field: " + fieldToUpdate + " is not a valid field.");
 				}
-				break;
 			}
 		}
-		System.err.println("Update Unsuccessful: Task Id not found.");
+		throw new IllegalArgumentException("Update Unsuccessful: Task Id " + taskId + " not found.");
 	}
 }

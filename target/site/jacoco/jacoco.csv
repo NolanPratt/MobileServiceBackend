@@ -1,0 +1,7 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+MobileServiceBackend,AppointmentService.core,Appointment,0,132,0,20,0,32,0,19,0,9
+MobileServiceBackend,AppointmentService.core,AppointmentService,0,144,0,18,0,31,0,16,0,6
+MobileServiceBackend,ContactService.core,ContactService,0,165,0,20,0,37,0,18,0,6
+MobileServiceBackend,ContactService.core,Contact,0,163,0,36,0,43,0,28,0,10
+MobileServiceBackend,TaskService.core,Task,0,93,0,20,0,25,0,16,0,6
+MobileServiceBackend,TaskService.core,TaskService,0,167,0,18,0,32,0,16,0,6

@@ -25,7 +25,7 @@ public class TaskServiceTest {
     	assertEquals(0, service.getTaskList().size()); // The task list should now be size 0
     }
     
-    // Testing the task addition method
+    // Testing Task addition method
     @Test
     public void testTaskListInsertion() {
     	Task task = new Task("1", "Change Clothes", "Remove clothes and put on new clothes.");
@@ -35,7 +35,7 @@ public class TaskServiceTest {
         assertEquals(1, service.getTaskList().size()); // The task list should now be size 1
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testAddDuplicateTask() {
         Task task1 = new Task("1", "Change Clothes", "Remove clothes and put on new clothes.");
         Task task2 = new Task("1", "Wash Clothes", "Wash dirty clothes in washer.");
@@ -46,7 +46,7 @@ public class TaskServiceTest {
         assertEquals(1, service.getTaskList().size()); // Only one task should be added
     }
     
-    // Testing the task delete method
+    // Testing Task deletion method
     @Test
     public void testDeleteTask() {
     	Task task1 = new Task("1", "Change Clothes", "Remove clothes and put on new clothes.");
@@ -61,8 +61,8 @@ public class TaskServiceTest {
         assertEquals("2", service.getTaskList().get(0).getTaskId()); // The final task's Id should be 2
     }
     
-    @Test
-    public void testInvalidDeleteTask() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeleteNonExistingTask() {
     	Task task1 = new Task("1", "Change Clothes", "Remove clothes and put on new clothes.");
         Task task2 = new Task("2", "Wash Clothes", "Wash dirty clothes in washer.");
 
@@ -70,13 +70,11 @@ public class TaskServiceTest {
         service.addTask(task2);
 
         service.deleteTask("3");
-
-        assertEquals(2, service.getTaskList().size()); // No tasks should be deleted
     }
     
-    // Testing the task update method
+    // Testing Task update method
     @Test(expected = IllegalArgumentException.class)
-    public void testUpdateTaskId() {
+    public void testInvalidUpdateTaskId() {
         Task task = new Task("1", "Change Clothes", "Remove clothes and put on new clothes.");
         service.addTask(task);
 
@@ -85,7 +83,7 @@ public class TaskServiceTest {
     }
     
     @Test
-    public void testUpdateTaskName() {
+    public void testValidUpdateTaskName() {
         Task task = new Task("1", "Change Clothes", "Remove clothes and put on new clothes.");
         service.addTask(task);
 
@@ -97,7 +95,7 @@ public class TaskServiceTest {
     }
     
     @Test
-    public void testUpdateTaskDescription() {
+    public void testValidUpdateTaskDescription() {
         Task task = new Task("1", "Change Clothes", "Remove clothes and put on new clothes.");
         service.addTask(task);
 
@@ -108,16 +106,13 @@ public class TaskServiceTest {
         assertEquals("Change current clothes to new ones.", updatedTask.getTaskDescription(updatedTask.getTaskId())); // The task's description should now be changed
     }
     
-    @Test
-    public void testUpdateInvalidTaskId() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateNonExistingTaskId() {
         Task task = new Task("1", "Change Clothes", "Remove clothes and put on new clothes.");
         service.addTask(task);
 
         // Update the task's description
         service.updateTask("2", "Task Description", "Change current clothes to new ones.");
-
-        Task updatedTask = service.getTaskList().get(0);
-        assertEquals("Remove clothes and put on new clothes.", updatedTask.getTaskDescription(updatedTask.getTaskId())); // The task's description should be unchanged
     }
     
     @Test(expected = IllegalArgumentException.class)

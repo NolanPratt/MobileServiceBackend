@@ -35,28 +35,28 @@ public class Contact {
 	// Setters
 	public void setFirstName(String firstName) {
 		if (firstName == null || firstName.length() > 10) {
-    		System.out.println("Invalid firstName. It must be a non-null string of up to 10 characters.");
+    		throw new IllegalArgumentException("Invalid firstName. It must be a non-null string of up to 10 characters.");
     	} else {
     		this.firstName = firstName;
     	}
 	}
 	public void setLastName(String lastName) {
 		if (lastName == null || lastName.length() > 10) {
-    		System.out.println("Invalid lastName. It must be a non-null string of up to 10 characters.");
+			throw new IllegalArgumentException("Invalid lastName. It must be a non-null string of up to 10 characters.");
     	} else {
     		this.lastName = lastName;
     	}
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		if (phoneNumber == null || phoneNumber.length() > 10) {
-    		System.out.println("Invalid phoneNumber. It must be a non-null string of exactly 10 digits.");
+			throw new IllegalArgumentException("Invalid phoneNumber. It must be a non-null string of exactly 10 digits.");
     	} else {
     		this.phoneNumber = phoneNumber;
     	}
 	}
 	public void setContactAddress(String contactAddress) {
-		if (contactAddress == null || contactAddress.length() > 10) {
-    		System.out.println("Invalid contactAddress. It must be a non-null string of up to 30 characters.");
+		if (contactAddress == null || contactAddress.length() > 30) {
+			throw new IllegalArgumentException("Invalid contactAddress. It must be a non-null string of up to 30 characters.");
     	} else {
     		this.contactAddress = contactAddress;
     	}

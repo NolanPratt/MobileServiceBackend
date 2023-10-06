@@ -2,6 +2,7 @@ package TaskService.test;
 
 import TaskService.core.Task;
 import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -11,6 +12,11 @@ public class TaskTest {
     @Before
     public void setUp() {
         task = new Task("1", "Change Clothes", "Remove clothes and put on new clothes.");
+    }
+    
+    @After
+    public void tearDown() {
+    	task = null;
     }
 
     
@@ -58,7 +64,7 @@ public class TaskTest {
     }
     
     
-    // Testing satisfaction of attribute length
+    // Testing satisfaction of attribute requirements
     @Test(expected = IllegalArgumentException.class)
     public void testValidTaskIdLength() {
         new Task("65165132165162161165", "Change Clothes", "Remove clothes and put on new clothes.");

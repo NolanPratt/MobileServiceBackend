@@ -18,8 +18,7 @@ public class ContactService {
 	// Add a new contact to the Contact list
 	public void addContact(Contact contact) {
 		if (contactExists(contact)) {
-	        System.err.println("Error: Duplicate Contact. Contact with ID " + contact.getContactId() + " already exists.");
-	        contact = null;
+	        throw new IllegalArgumentException("Error: Duplicate Contact. Contact with ID " + contact.getContactId() + " already exists.");
 	    } else {
 	        contactList.add(contact);
 	    }
@@ -50,30 +49,28 @@ public class ContactService {
 			if (contact.getContactId().equals(contactId)) {
 				switch (fieldToUpdate) {
 			    case "Contact Id":
-			        System.out.println("Invalid Request: Contact Id is Immutable.");
-			        break;
+			    	throw new IllegalArgumentException("Invalid Request: Contact Id is Immutable.");
 			    case "First Name":
 			    	contact.setFirstName(newValue);
 			    	System.out.println("Update Success: Contact First Name Changed.");
-			        break;
+			        return;
 			    case "Last Name":
 			    	contact.setLastName(newValue);
 			    	System.out.println("Update Success: Contact Last Name Changed.");
-			        break;
+			    	return;
 			    case "Phone Number":
 			    	contact.setPhoneNumber(newValue);
 			    	System.out.println("Update Success: Contact Phone Number Changed.");
-			        break;
-			    case "Home Address":
+			    	return;
+			    case "Contact Address":
 			    	contact.setContactAddress(newValue);
-			    	System.out.println("Update Success: Contact Home Address Changed.");
-			        break;
+			    	System.out.println("Update Success: Contact Address Changed.");
+			    	return;
 			    default:
-			        System.out.println("Invalid Field");
-			        break;
+			    	throw new IllegalArgumentException("Invalid Field: " + fieldToUpdate);
 				}
-				break;
 			}
 		}
+		throw new IllegalArgumentException("Invalid Contact: Contact with Id " + contactId + " not found.");
 	}
 }
